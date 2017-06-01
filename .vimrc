@@ -35,7 +35,7 @@ set nocompatible
   Bundle 'ColorSchemeMenuMaker'
 
   " match lots of things
-  Bundle 'edsono/vim-matchit'
+  Bundle 'geoffharcourt/vim-matchit'
 
   Bundle 'L9'
   Bundle 'FuzzyFinder'
