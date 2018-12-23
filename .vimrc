@@ -1,10 +1,8 @@
-set nocompatible
-
 " this sets up vundle to manage plugins
 " https://github.com/gmarik/vundle
 " to use:
 "   mkdir -p ~/.vim/bundle
-"   git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"   git clone http://github.com/VundleVim/vundle.vim.git ~/.vim/bundle/Vundle.vim
 "   vim +BundleInstall
 
 " <vundle-config>
