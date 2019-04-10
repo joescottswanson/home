@@ -11,43 +11,49 @@ set nocompatible
 
   filetype off
 
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 
   " let Vundle manage Vundle - required
-  Bundle 'gmarik/vundle'
+  Plugin 'gmarik/vundle'
 
   " really nice file tree:
-  Bundle 'scrooloose/nerdtree'
+  Plugin 'scrooloose/nerdtree'
 
   " align text vertically on a string:
-  Bundle 'Align'
+  Plugin 'Align'
 
   " wrap common version control commands:
-  Bundle 'vcscommand.vim'
-  Bundle 'tpope/vim-fugitive'
+  Plugin 'vcscommand.vim'
+  Plugin 'tpope/vim-fugitive'
 
   " a bunch of colorschemes + a gui menu listing them
-  Bundle 'flazz/vim-colorschemes'
-  Bundle 'altercation/vim-colors-solarized'
-  Bundle 'chriskempson/vim-tomorrow-theme.git'
-  Bundle 'desert-warm-256'
-  Bundle 'ColorSchemeMenuMaker'
+  Plugin 'flazz/vim-colorschemes'
+  Plugin 'altercation/vim-colors-solarized'
+  Plugin 'chriskempson/vim-tomorrow-theme.git'
+  Plugin 'desert-warm-256'
+  Plugin 'ColorSchemeMenuMaker'
 
   " match lots of things
-  Bundle 'edsono/vim-matchit'
+  Plugin 'edsono/vim-matchit'
 
-  Bundle 'L9'
-  Bundle 'FuzzyFinder'
-  " Bundle 'surround.vim'
+  Plugin 'L9'
+  Plugin 'FuzzyFinder'
+  " Plugin 'surround.vim'
 
+  Plugin 'vimwiki/vimwiki'
+
+  call vundle#end()
 " </vundle-config>
 
 set title
 
 syntax on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
+
+"command from tyler - when a new buffer is read/loaded, and it's a *.php file,
+"it sets all those variables
+autocmd BufRead,BufNewFile *.php setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab
 
 " adds line numbers
  set number
