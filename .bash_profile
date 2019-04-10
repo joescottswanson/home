@@ -8,6 +8,9 @@ export PYTHONPATH
 
 # Alias to sfe.py
 alias sfe="/Users/joeswanson/spark/paleo/sfe.py"
+alias ll="ls -AlFh"
+alias cds="cd /var/www"
+alias log="sudo tailf /var/log/nginx/error.log"
 
 # Parse my git branch and add it to my prompt
 function parse_git_branch {

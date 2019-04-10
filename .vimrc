@@ -1,21 +1,20 @@
-set nocompatible
-
 " this sets up vundle to manage plugins
 " https://github.com/gmarik/vundle
 " to use:
 "   mkdir -p ~/.vim/bundle
-"   git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"   git clone http://github.com/VundleVim/vundle.vim.git ~/.vim/bundle/Vundle.vim
 "   vim +BundleInstall
 
 " <vundle-config>
 
+  set nocompatible
   filetype off
 
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
 
   " let Vundle manage Vundle - required
-  Plugin 'gmarik/vundle'
+  Plugin 'VundleVim/Vundle.vim'
 
   " really nice file tree:
   Plugin 'scrooloose/nerdtree'
@@ -35,7 +34,7 @@ set nocompatible
   Plugin 'ColorSchemeMenuMaker'
 
   " match lots of things
-  Plugin 'edsono/vim-matchit'
+  Plugin 'geoffharcourt/vim-matchit'
 
   Plugin 'L9'
   Plugin 'FuzzyFinder'
@@ -44,12 +43,11 @@ set nocompatible
   Plugin 'vimwiki/vimwiki'
 
   call vundle#end()
+  filetype plugin indent on
 " </vundle-config>
 
 set title
-
 syntax on
-filetype plugin indent on
 
 "command from tyler - when a new buffer is read/loaded, and it's a *.php file,
 "it sets all those variables
@@ -90,8 +88,8 @@ set smartcase
 " display tab characters as 8 spaces, indent 2 spaces,
 " always use spaces instead of tabs
 set tabstop=8
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set autoindent
 "set smarttab
@@ -194,6 +192,6 @@ set autoread
 
 " <colors>
 " colorscheme brookstream
-colorscheme pyte
+" colorscheme pyte
 " colorscheme mustang
 " </colors>
