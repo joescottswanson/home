@@ -10,7 +10,7 @@ export PYTHONPATH
 alias sfe="/Users/joeswanson/spark/paleo/sfe.py"
 alias ll="ls -AlFh"
 alias cds="cd /var/www"
-alias log="sudo tailf /var/log/nginx/error.log"
+alias log="sudo tail -f /var/log/nginx/error.log"
 
 # Parse my git branch and add it to my prompt
 function parse_git_branch {
@@ -19,7 +19,7 @@ function parse_git_branch {
 }
 export PS1='\h:\[\e[32m\]\w\e[0m\] \u \e[0;31m\]$(parse_git_branch)\e[0m\] \n \t $ '
 
-alias dev='ssh -A joe@10.255.198.40'
+alias dev='ssh -A joe@joe-dev'
 alias mountdev='sshfs joe@joe-dev:/var/spork/sparkfun /users/joeswanson/mnt/joe-dev'
 alias mountcasper='sshfs joe@joe-dev:/var/spork/sparkfun/tests/integration/captures /users/joeswanson/mnt/casper'
 
