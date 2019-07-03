@@ -41,6 +41,9 @@
   " Plugin 'surround.vim'
 
   Plugin 'vimwiki/vimwiki'
+  Plugin 'vim-vdebug/vdebug'
+
+  Plugin 'w0rp/ale'
 
   call vundle#end()
   filetype plugin indent on
@@ -49,8 +52,7 @@
 set title
 syntax on
 
-"command from tyler - when a new buffer is read/loaded, and it's a *.php file,
-"it sets all those variables
+" set 2 character indentation for php files
 autocmd BufRead,BufNewFile *.php setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab
 
 " adds line numbers
@@ -111,32 +113,15 @@ au FileType make setlocal noexpandtab
 " use comma for the leader key
 let mapleader = ","
 
-" treat p1k3 entries as HTML. lazy, but unlikely to hit many false positives:
-au BufReadPost,BufNewFile */p1k3/*[0123456789]* call PikeHighlight()
-
-" the ! means this can be freely redeclared - makes it easier to source
-" ~/.vimrc after changes
-fun! PikeHighlight()
-  " make sure NERDTree windows don't get messed up
-  if bufname("%") =~ "NERD_tree"
-    return
-  endif
-
-  " the initial slash seems to be necessary to make \v work
-  if bufname("%") =~ "\\v([0-9]{1,2}|[a-z]+)$"
-    set filetype=html
-  endif
-endfun
-
 " assume *.t files are PHP - not actually much use for this
-au BufRead,BufNewFile *.t set filetype=php
+" au BufRead,BufNewFile *.t set filetype=php
 
 " <keybindings>
 
   " split lines under the cursor
   map K i<CR><Esc>g;
 
-  " get a datestamp for a p1k3 entry
+  " get a datestamp
   " .-1 puts it on the current line, since :r reads onto the line below the
   " current one (or below the specified line - so here we're specifying the
   " one before the current one)
@@ -161,20 +146,17 @@ au BufRead,BufNewFile *.t set filetype=php
 
   " tab navigation somewhat like firefox
   " http://vim.wikia.com/wiki/Alternative_tab_navigation
-  nmap <C-S-Tab> :tabprevious<CR>
-  nmap <C-Tab> :tabnext<CR>
-  map <C-S-Tab> :tabprevious<CR>
-  map <C-Tab> :tabnext<CR>
-  imap <C-S-Tab> <Esc>:tabprevious<CR>i
-  imap <C-Tab> <Esc>:tabnext<CR>i       
+  " nmap <C-S-Tab> :tabprevious<CR>
+  " nmap <C-Tab> :tabnext<CR>
+  " map <C-S-Tab> :tabprevious<CR>
+  " map <C-Tab> :tabnext<CR>
+  " imap <C-S-Tab> <Esc>:tabprevious<CR>i
+  " imap <C-Tab> <Esc>:tabnext<CR>i       
   " new tab:
   nmap <leader>tn :tabnew<CR>
 
   " fuzzyfinder
   nmap <leader>f :FufFile<CR>
-
-  " check PHP syntax - TODO: expand to syntax check [whatever filetype]
-  noremap <leader>c :!php -l %<CR>
 
   " display tabs - ,s will toggle (redraws just in case)
   nmap <silent> <leader>s :set nolist!<CR>:redr<CR>
@@ -182,10 +164,6 @@ au BufRead,BufNewFile *.t set filetype=php
   set list
 
 " </keybindings>
-
-" retain view/folds
-au BufWinLeave notes mkview
-au BufWinEnter notes silent loadview
 
 " read (unchanged) buffers when they're modified on filesystem
 set autoread
@@ -195,3 +173,17 @@ set autoread
 " colorscheme pyte
 " colorscheme mustang
 " </colors>
+
+let g:vdebug_options = {'ide_key': 'netbeans-xdebug'}
+let g:vdebug_options = {'server': 'localhost'}
+let g:vdebug_options = {'port': '9000'}
+
+" folding configs
+" set foldmethod=indent
+" set foldlevel=1
+
+" linter setup
+let g:ale_echo_msg_format = '%linter% says %s'
+let g:ale_lint_on_text_cahnged = 'never'
+let g:ale_lint_on_insert_leave = 0
+"let g:ale_linters = {'javascript': ['eslint']}
