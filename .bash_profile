@@ -26,7 +26,6 @@ alias mountcasper='sshfs joe@joe-dev:/var/spork/sparkfun/tests/integration/captu
 SPARK_DIR="/Users/joeswanson/spark/paleo"
 alias cds='cd $SPARK_DIR && source paleo_env/bin/activate'
 
-alias ll='ls -AlFh'
 alias settings='vim /users/joeswanson/spark/paleo/sfe/settings.py'
 
 # A jq command to clean up superfluous jupyter notebook data (for use with git to make notebooks friendlier)
