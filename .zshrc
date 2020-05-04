@@ -31,9 +31,15 @@ if [ -f $HOME/.env ]; then
   fi
 fi
 
-# Parse my git branch and add it to my prompt
-function parse_git_branch {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "("${ref#refs/heads/}")"
-}
-export PS1='\h:\[\e[32m\]\w\e[0m\] \u \e[0;31m\]$(parse_git_branch)\e[0m\] \n \t $ '
+# load in git branch info
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+zstyle ':vcs_info:git:*' formats '%F{red}(%b)%f'
+zstyle ':vcs_info:*' enable git
+
+# Set up the prompt (with git branch name)
+setopt PROMPT_SUBST
+PROMPT="%m:%F{green}%~%f %n \$vcs_info_msg_0_"$'\n'" %* $ "
+
+alias ll="ls -AlFh"
