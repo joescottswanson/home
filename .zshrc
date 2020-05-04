@@ -1,5 +1,5 @@
 # include env file
-if [ -f $HOME/.env ]; then
+if [ -f $HOME/.shell_env ]; then
   . $HOME/.shell_env
 
   echo $VENV_ACTIVATE_PATH
