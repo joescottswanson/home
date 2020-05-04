@@ -163,6 +163,17 @@ let mapleader = ","
   set listchars=tab:⇾\ ,trail:·
   set list
 
+  let g:vdebug_keymap = {
+  \ "run" : "<Leader>/",
+  \ "run_to_cursor" : "<Down>",
+  \ "step_over" : "<Up>",
+  \ "step_into" : "<Left>",
+  \ "step_out" : "<Right>",
+  \ "close" : "q",
+  \ "detach" : "<F7>",
+  \ "set_breakpoint" : "<Leader>s",
+  \ "eval_visual" : "<leader>e"
+  \}
 " </keybindings>
 
 " read (unchanged) buffers when they're modified on filesystem
@@ -177,6 +188,7 @@ set autoread
 let g:vdebug_options = {'ide_key': 'netbeans-xdebug'}
 let g:vdebug_options = {'server': 'localhost'}
 let g:vdebug_options = {'port': '9000'}
+let g:vdebug_options['watch_window_style'] = 'compact'
 
 " folding configs
 " set foldmethod=indent
@@ -184,6 +196,6 @@ let g:vdebug_options = {'port': '9000'}
 
 " linter setup
 let g:ale_echo_msg_format = '%linter% says %s'
-let g:ale_lint_on_text_cahnged = 'never'
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-"let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint']}
