@@ -121,11 +121,8 @@ let mapleader = ","
   " split lines under the cursor
   map K i<CR><Esc>g;
 
-  " get a datestamp
-  " .-1 puts it on the current line, since :r reads onto the line below the
-  " current one (or below the specified line - so here we're specifying the
-  " one before the current one)
-  nmap <leader>td :.-1r !today<CR><CR>
+  " get a datestamp surrounded by == (for vimwikidiary headings)
+  nmap <leader>td :put! =strftime('%Y-%m-%d')<CR>==
 
   " reformat a paragraph
   nmap <leader>q gqip
@@ -185,10 +182,14 @@ set autoread
 " colorscheme mustang
 " </colors>
 
-let g:vdebug_options = {'ide_key': 'netbeans-xdebug'}
-let g:vdebug_options = {'server': 'localhost'}
-let g:vdebug_options = {'port': '9000'}
-let g:vdebug_options['watch_window_style'] = 'compact'
+let g:vdebug_options = {}
+let g:vdebug_options['server'] = 'localhost'
+let g:vdebug_options['port'] = '9000'
+let g:vdebug_options['watch_window_style'] = 'expanded'
+let g:vdebug_options['break_on_open'] = 0
+let g:vdebug_options['continuous_mode'] = 1
+let g:vdebug_options['debug_file'] = '~/vdebug.log'
+let g:vdebug_options['debug_file_level'] = 2
 
 " folding configs
 " set foldmethod=indent
