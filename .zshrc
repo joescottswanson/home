@@ -1,8 +1,7 @@
 # include env file
-if [ -f $HOME/.env ]; then
+if [ -f $HOME/.shell_env ]; then
   . $HOME/.shell_env
 
-  echo $VENV_ACTIVATE_PATH
   # set up cds alias to change dirs to project root and maybe activate a venv if VENV_ACTIVATE_PATH is set
   if [ -n "$VENV_ACTIVATE_PATH" ]; then
     alias cds="cd $WORKING_DIR && source $VENV_ACTIVATE_PATH"
