@@ -40,6 +40,7 @@
   Plugin 'FuzzyFinder'
   " Plugin 'surround.vim'
 
+  Plugin 'mattn/calendar-vim'
   Plugin 'vimwiki/vimwiki'
   Plugin 'vim-vdebug/vdebug'
 
@@ -198,3 +199,14 @@ let g:ale_echo_msg_format = '%linter% says %s'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_linters = {'javascript': ['eslint']}
+
+" vimwiki setup
+augroup vimwikigroup
+  autocmd!
+  " automatically update links on read diary
+  autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+augroup end
+let g:vimwiki_list = [
+                        \{'path': '~/vimwiki/work/'},
+                        \{'path': '~/vimwiki/gym/'}
+                \]
