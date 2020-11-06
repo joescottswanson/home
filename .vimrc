@@ -36,15 +36,21 @@
   " match lots of things
   Plugin 'geoffharcourt/vim-matchit'
 
-  Plugin 'L9'
-  Plugin 'FuzzyFinder'
+  Plugin 'junegunn/fzf'
+  Plugin 'junegunn/fzf.vim'
+  Plugin 'zackhsi/fzf-tags'
   " Plugin 'surround.vim'
+  "
+  Plugin 'ludovicchabant/vim-gutentags'
+  Plugin 'preservim/tagbar'
 
   Plugin 'mattn/calendar-vim'
   Plugin 'vimwiki/vimwiki'
   Plugin 'vim-vdebug/vdebug'
 
   Plugin 'w0rp/ale'
+
+  Plugin 'sheerun/vim-polyglot'
 
   call vundle#end()
   filetype plugin indent on
@@ -154,7 +160,9 @@ let mapleader = ","
   nmap <leader>tn :tabnew<CR>
 
   " fuzzyfinder
-  nmap <leader>f :FufFile<CR>
+  nmap <leader>f :Files<CR>
+  " fzf-tags
+  nmap <C-]> <Plug>(fzf_tags)
 
   " display tabs - ,s will toggle (redraws just in case)
   nmap <silent> <leader>s :set nolist!<CR>:redr<CR>
@@ -201,6 +209,7 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_linters = {'javascript': ['eslint']}
 
 " vimwiki setup
+
 augroup vimwikigroup
   autocmd!
   " automatically update links on read diary
@@ -210,3 +219,22 @@ let g:vimwiki_list = [
                         \{'path': '~/vimwiki/work/'},
                         \{'path': '~/vimwiki/gym/'}
                 \]
+
+" gutentags setup
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ ]
+
+" tagbar setup
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
+let g:no_status_line = 1
+let g:tagbar_show_tag_linenumbers = 1
+let g:tagbar_phpctags_bin='~/.vim/phpctags'
