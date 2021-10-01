@@ -57,13 +57,16 @@
 " </vundle-config>
 
 set title
+
+" syntax highlighting, with a long redrawtime for large files
 syntax on
+set redrawtime=10000
 
 " set 2 character indentation for php files
 autocmd BufRead,BufNewFile *.php setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab
 
 " adds line numbers
- set number
+set number
 
 " do not beep or flash at me
 " vb is needed to stop beep
