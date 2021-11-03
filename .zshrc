@@ -42,3 +42,27 @@ setopt PROMPT_SUBST
 PROMPT="%m:%F{green}%~%f %n \$vcs_info_msg_0_"$'\n'" %* $ "
 
 alias ll="ls -AlFh"
+
+# set up fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# set up autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# track history in a file
+export HISTFILE=~/.zsh_history
+
+# make it keep track of a lot of history
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+
+# append the file immediately after entering a command (instead of waiting until the shell closes)
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+
+# adds a timestamp to history
+setopt EXTENDED_HISTORY
+
+# get rid of duplicate entries
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
