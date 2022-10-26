@@ -58,6 +58,12 @@
 
   Plugin 'sheerun/vim-polyglot'
 
+  " kotlin syntax highlighting, etc.
+  Plugin 'udalov/kotlin-vim'
+
+  " respect the editorconfig file
+  Plugin 'editorconfig/editorconfig-vim'
+
   call vundle#end()
   filetype plugin indent on
 " </vundle-config>
@@ -68,8 +74,8 @@ set title
 syntax on
 set redrawtime=10000
 
-" set 2 character indentation for php files
-autocmd BufRead,BufNewFile *.php setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab
+" set 2 character indentation for php and kotlin files
+autocmd BufRead,BufNewFile *.php, *.kt setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab smarttab
 
 " adds line numbers
 set number
@@ -169,7 +175,7 @@ let mapleader = ","
   nmap <leader>tn :tabnew<CR>
 
   " fuzzyfinder
-  nmap <leader>f :Files<CR>
+  nmap <leader>f :GFiles<CR>
   " fzf-tags
   nmap <C-]> <Plug>(fzf_tags)
   " fzf ripgrep
@@ -217,7 +223,7 @@ let g:vdebug_options['continuous_mode'] = 1
 let g:ale_echo_msg_format = '%linter% says %s'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['pylint','flake8'], 'kotlin': ['ktlint']}
 
 " vimwiki setup
 
@@ -295,3 +301,6 @@ let g:gutentags_ctags_exclude = [
 " autocmd VimEnter * nested :call tagbar#autoopen(1)
 let g:no_status_line = 1
 let g:tagbar_show_tag_linenumbers = 1
+
+" have ripgrep ignore file names in searches
+command! -bang -nargs=* Rg call fzf#vim#grep("rg -g '!.git' -g '!node_modules' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0) 
