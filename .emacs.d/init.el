@@ -199,7 +199,7 @@
 ;; Org capture to use in xmonad
 ;; <http://www.solasistim.net/posts/org_mode_with_capture_and_xmonad/>
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/actions_list.org" "TODO") "* TODO %t %?")))
+      '(("t" "Todo" entry (file+headline "~/org/actions_list.org" "TODO") "* TODO %u %?")))
 
 (defadvice org-capture-finalize
            (after delete-capture-frame activate)
