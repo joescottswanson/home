@@ -223,7 +223,7 @@ let g:vdebug_options['continuous_mode'] = 1
 let g:ale_echo_msg_format = '%linter% says %s'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-let g:ale_linters = {'javascript': ['eslint'], 'python': ['pylint','flake8'], 'kotlin': ['ktlint']}
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8'], 'kotlin': ['ktlint']}
 
 " vimwiki setup
 
