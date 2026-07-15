@@ -43,7 +43,6 @@
 
     " Use fzf for multi-definition tags:
     Plugin 'zackhsi/fzf-tags'
-    nmap <C-]> <Plug>(fzf_tags)
   " }}}
 
 
@@ -64,6 +63,9 @@
   " respect the editorconfig file
   Plugin 'editorconfig/editorconfig-vim'
 
+  " java syntax highlighting
+  Plugin 'uiiaoo/java-syntax.vim'
+
   call vundle#end()
   filetype plugin indent on
 " </vundle-config>
@@ -79,6 +81,9 @@ autocmd BufRead,BufNewFile *.php, *.kt setlocal tabstop=2 shiftwidth=2 softtabst
 
 " adds line numbers
 set number
+
+" wrap on word boundaries (not letter)
+set linebreak
 
 " do not beep or flash at me
 " vb is needed to stop beep
@@ -180,6 +185,8 @@ let mapleader = ","
   nmap <C-]> <Plug>(fzf_tags)
   " fzf ripgrep
   nmap <leader>g :Rg<CR>
+  " fzf buffers
+  nmap <leader>b :Buffer<CR>
 
   " display tabs - ,s will toggle (redraws just in case)
   nmap <silent> <leader>s :set nolist!<CR>:redr<CR>
@@ -195,7 +202,7 @@ let mapleader = ","
   \ "close" : "q",
   \ "detach" : "<F7>",
   \ "set_breakpoint" : "<Leader>s",
-  \ "eval_visual" : "<leader>e"
+ \ "eval_visual" : "<leader>e"
   \}
 " </keybindings>
 
@@ -216,14 +223,32 @@ let g:vdebug_options['break_on_open'] = 0
 let g:vdebug_options['continuous_mode'] = 1
 
 " folding configs
-" set foldmethod=indent
+" set foldmethod=syntax
 " set foldlevel=1
 
 " linter setup
 let g:ale_echo_msg_format = '%linter% says %s'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8'], 'kotlin': ['ktlint']}
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8','black'], 'kotlin': ['ktlint']}
+
+" set up visual line wrapping:
+" https://www.baryudin.com/en/pages/ab-it-blog/vim-line-wrapping-and-word-boundary/
+" honestly not sure how exactly this works, but my k and j commands are handy
+" for visual line navigation in vimwiki
+function SetVisualWrap()
+  setlocal wrap linebreak nolist
+  set virtualedit=
+  setlocal display+=lastline
+  noremap  <buffer> <silent> k gk
+  noremap  <buffer> <silent> j gj
+  noremap  <buffer> <silent> <Home> g<Home>
+  noremap  <buffer> <silent> <End>  g<End>
+  inoremap <buffer> <silent> <Up>   <C-o>gk
+  inoremap <buffer> <silent> <Down> <C-o>gj
+  inoremap <buffer> <silent> <Home> <C-o>g<Home>
+  inoremap <buffer> <silent> <End>  <C-o>g<End>
+endfunction
 
 " vimwiki setup
 
@@ -231,6 +256,7 @@ augroup vimwikigroup
   autocmd!
   " automatically update links on read diary
   autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+  autocmd BufRead,BufNewFile *.wiki call SetVisualWrap()
 augroup end
 let g:vimwiki_list = [
                         \{'path': '~/vimwiki/work/'},
@@ -303,4 +329,4 @@ let g:no_status_line = 1
 let g:tagbar_show_tag_linenumbers = 1
 
 " have ripgrep ignore file names in searches
-command! -bang -nargs=* Rg call fzf#vim#grep("rg -g '!.git' -g '!node_modules' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0) 
+command! -bang -nargs=* Rg call fzf#vim#grep("rg -g '!.git' -g '!node_modules' -g '!site-packages' --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0) 
