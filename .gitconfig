@@ -6,7 +6,6 @@
 	safecrlf = true
         attributesfile = ~/.gitattributes_global
 	editor = vim
-	sshCommand = ssh -i ~/.ssh/campspot_github -F /dev/null
 [alias]
     hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [color]

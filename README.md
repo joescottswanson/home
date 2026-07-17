@@ -28,3 +28,20 @@ SETTINGS_DIR
     git fetch
     git branch master origin/master
     git checkout master
+    
+## Getting Hammerspoon to Work
+```
+brew install hammerspoon
+```
+Then when you load it up, you have to enable accessibility, even though that seems weird.
+
+## Getting Neovim to Work
+```
+brew install neovim
+```
+
+## Getting Emacs to Work
+```
+brew install --cask emacs
+```
+Not positive, but you may need to do an 'M-x package-install'
